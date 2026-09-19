@@ -1,3 +1,5 @@
+import serial
+
 from dataclasses import dataclass
 from functools import cached_property, reduce
 
@@ -50,8 +52,14 @@ class Reading:
         return idx
 
 
-with open("ref/weather.log") as f:
-    readings = [Reading(line=l.strip()) for l in f]
+ser = serial.Serial(
+    port="/dev/serial0",
+    baudrate=9600,
+    bytesize=serial.EIGHTBITS,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+)
 
-for r in readings:
-    print(r.index)
+while line := ser.read_until():
+    reading = Reading(line=line.decode("utf-8").strip())
+    print(reading.index)
