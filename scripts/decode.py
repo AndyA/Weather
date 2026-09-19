@@ -1,34 +1,6 @@
 from dataclasses import dataclass
 from functools import cached_property, reduce
 
-# c000s000g000t074r012p012h61b10080*36
-# c000s000g005t074r012p012h59b10079*3E
-# c000s001g009t074r012p012h59b10079*33
-# c000s005g011t074r012p012h59b10079*3E
-# c000s005g011t074r012p012h59b10080*38
-# c000s006g011t074r012p012h59b10080*3B
-# c045s000g005t074r012p012h59b10079*3F
-# c045s000g007t074r012p012h59b10079*3D
-#  234 234 234 234 234 234 23 23456
-
-
-# c045
-# s000
-# g007
-# t074
-# r012
-# p012
-# h59
-# b10079
-# *3D
-
-
-@dataclass(kw_only=True, frozen=True)
-class Datum:
-    tag: str
-    value: int
-
-
 FIELDS = [
     ("c", 4),
     ("s", 4),
