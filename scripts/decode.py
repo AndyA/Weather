@@ -1,7 +1,8 @@
-import serial
-
 from dataclasses import dataclass
+from datetime import datetime
 from functools import cached_property, reduce
+
+import serial
 
 FIELDS = [
     ("c", 4),
@@ -46,7 +47,7 @@ class Reading:
             slice = self.body[pos:][:w]
             if slice[0] != t:
                 raise ValueError(f"Bad tag '{slice[0]}', expected '{t}'")
-            idx[t] = int(slice[1:])
+            idx[t] = int(slice[1:], 10)
             pos += w
 
         return idx
@@ -62,4 +63,4 @@ ser = serial.Serial(
 
 while line := ser.read_until():
     reading = Reading(line=line.decode("utf-8").strip())
-    print(reading.index)
+    print(datetime.now().strftime("%Y:%m:%d %H:%M:%S"), reading.index)
