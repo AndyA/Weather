@@ -61,6 +61,12 @@ ser = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
 )
 
+
+def f2c(f):
+    return (f - 32) * 100 / (212 - 32)
+
+
 while line := ser.read_until():
     reading = Reading(line=line.decode("utf-8").strip())
-    print(datetime.now().strftime("%Y:%m:%d %H:%M:%S"), reading.index)
+    tmp = round(f2c(reading.index["t"]) * 2) / 2
+    print(datetime.now().strftime("%Y:%m:%d %H:%M:%S"), reading.index, tmp)
