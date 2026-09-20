@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from functools import cached_property, reduce
-from tinyflux import TinyFlux, Point
-
 
 import serial
+from tinyflux import Point, TinyFlux
 
 FIELDS = [
     ("c", 4),
@@ -67,7 +66,7 @@ ser = serial.Serial(
 db = TinyFlux("tmp/sensor_data.csv")
 
 while line := ser.read_until():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     reading = Reading(line=line.decode("utf-8").strip())
     point = Point(time=now, measurement="weather", fields=reading.index)
     db.insert(point)
