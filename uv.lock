@@ -12,12 +12,25 @@ wheels = [
 ]
 
 [[package]]
+name = "tinyflux"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/62/d6/5e04766bead683b9fcb854eacf6aa5ea2a80acad921ddf47a0756460a5d1/tinyflux-1.2.0.tar.gz", hash = "sha256:727a069ea8e4946c7c607005d7637b9ca48a4e47a7f7b7d5fb39b3b30a4e1dc3", size = 65470, upload-time = "2026-01-26T18:41:48.336Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ef/b2/c91d46913cb02f89283faa47782a12ca3316ed84fcdd62fd303343f7c2a3/tinyflux-1.2.0-py3-none-any.whl", hash = "sha256:8af3b1f95bedaafb791c7c3b9c3e6e941f05623a470676401d9e4c0f068bbc7a", size = 38644, upload-time = "2026-01-26T18:41:46.902Z" },
+]
+
+[[package]]
 name = "weather"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "pyserial" },
+    { name = "tinyflux" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "pyserial", specifier = ">=3.5" }]
+requires-dist = [
+    { name = "pyserial", specifier = ">=3.5" },
+    { name = "tinyflux", specifier = ">=1.2.0" },
+]
