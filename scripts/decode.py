@@ -58,13 +58,18 @@ class Reading:
 @dataclass(kw_only=True)
 class Logger:
     prefix: str
-    db: TinyFlux | None = None
+    handle: TinyFlux | None = None
     current: str | None = None
 
     def db(self, ts: datetime) -> TinyFlux:
         path = os.path.join(self.prefix, ts.strftime("%Y/%m/%d/%H.csv"))
-        if path == self.current:
-            return self.db
+        if path != self.current:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            self.handle = TinyFlux(path)
+            self.current = path
+
+        assert self.handle is not None
+        return self.handle
 
 
 ser = serial.Serial(
@@ -75,11 +80,10 @@ ser = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
 )
 
-
-db = TinyFlux("tmp/sensor_data.csv")
+logger = Logger(prefix="/data/logs/weather")
 
 while line := ser.read_until():
     now = datetime.now(UTC)
     reading = Reading(line=line.decode("utf-8").strip())
     point = Point(time=now, measurement="weather", fields=reading.index)
-    db.insert(point)
+    logger.db(now).insert(point)
