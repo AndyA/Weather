@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from functools import cached_property, reduce
@@ -52,6 +53,18 @@ class Reading:
             pos += w
 
         return idx
+
+
+@dataclass(kw_only=True)
+class Logger:
+    prefix: str
+    db: TinyFlux | None = None
+    current: str | None = None
+
+    def db(self, ts: datetime) -> TinyFlux:
+        path = os.path.join(self.prefix, ts.strftime("%Y/%m/%d/%H.csv"))
+        if path == self.current:
+            return self.db
 
 
 ser = serial.Serial(
