@@ -4,7 +4,7 @@ from lib.json_logger import JsonLogger
 from lib.tools import obj_diff
 from tinyflux import MeasurementQuery, TinyFlux
 
-logger = JsonLogger(prefix="tmp/logs/json")
+logger = JsonLogger(prefix="/data/weather/logs/windy")
 
 
 for log in glob.glob("tmp/tinyflux/**/*.csv", recursive=True):
