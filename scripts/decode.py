@@ -1,7 +1,10 @@
+import json
 import os
+from collections.abc import Generator
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from functools import cached_property, reduce
+from typing import Any
 
 import serial
 from tinyflux import Point, TinyFlux
@@ -72,18 +75,58 @@ class Logger:
         return self.handle
 
 
-ser = serial.Serial(
-    port="/dev/serial0",
-    baudrate=9600,
-    bytesize=serial.EIGHTBITS,
-    parity=serial.PARITY_NONE,
-    stopbits=serial.STOPBITS_ONE,
-)
+@dataclass(kw_only=True, frozen=True)
+class SerialSource:
+    port: str
 
-logger = Logger(prefix="/data/logs/weather")
+    @cached_property
+    def _ser(self) -> serial.Serial:
+        return serial.Serial(
+            port=self.port,
+            baudrate=9600,
+            bytesize=serial.EIGHTBITS,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+        )
 
-while line := ser.read_until():
+    def messages(self) -> Generator[str, Any]:
+        while line := self._ser.read_until():
+            yield line.decode("utf-8").strip()
+
+
+@dataclass(kw_only=True, frozen=True)
+class FileSource:
+    name: str
+
+    def messages(self) -> Generator[str, Any]:
+        with open(self.name, "r") as f:
+            for line in f:
+                yield line.strip()
+
+
+def obj_diff(a: dict[str, int], b: dict[str, int]) -> dict[str, int]:
+    return {k: v for k, v in b.items() if a[k] != v}
+
+
+DRYRUN = False
+
+if DRYRUN:
+    source = FileSource(name="ref/weather.log")
+    logger = Logger(prefix="tmp/logs")
+else:
+    source = SerialSource(port="/dev/serial0")
+    logger = Logger(prefix="/data/logs/weather")
+
+prev: dict[str, int] | None = None
+for line in source.messages():
     now = datetime.now(UTC)
-    reading = Reading(line=line.decode("utf-8").strip())
+    reading = Reading(line=line)
     point = Point(time=now, measurement="weather", fields=reading.index)
     logger.db(now).insert(point)
+    if prev:
+        delta = obj_diff(prev, reading.index)
+    else:
+        delta = reading.index
+    prev = reading.index
+    diff: dict[str, str | int] = {"time": now.isoformat(), **delta}
+    print(json.dumps(diff))
