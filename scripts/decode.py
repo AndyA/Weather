@@ -128,5 +128,6 @@ for line in source.messages():
     else:
         delta = reading.index
     prev = reading.index
-    diff: dict[str, str | int] = {"time": now.isoformat(), **delta}
-    print(json.dumps(diff))
+    if len(delta):
+        diff: dict[str, str | int] = {"time": now.isoformat(), **delta}
+        print(json.dumps(diff))
