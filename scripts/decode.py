@@ -6,12 +6,8 @@ from lib.json_logger import JsonLogger
 from lib.reading import Reading
 from lib.sources import FileSource, SerialSource
 from lib.tinyflux_logger import TinyFluxLogger
+from lib.tools import obj_diff
 from tinyflux import Point
-
-
-def obj_diff(a: dict[str, int], b: dict[str, int]) -> dict[str, int]:
-    return {k: v for k, v in b.items() if a[k] != v}
-
 
 DRYRUN = platform.node() != "windy"
 
@@ -41,12 +37,10 @@ for line in source.messages():
         prev = None
         prev_log = log
 
-    if prev:
-        delta = obj_diff(prev, reading.index)
-    else:
-        delta = reading.index
+    delta = obj_diff(prev, reading.index)
     prev = reading.index
+
     if len(delta):
-        diff: dict[str, str | int] = {"time": now.isoformat(), **delta}
-        print(json.dumps(diff))
-        j_logger.append(now, diff)
+        payload: dict[str, str | int] = {"time": now.isoformat(), **delta}
+        print(json.dumps(payload))
+        j_logger.append(now, payload)
