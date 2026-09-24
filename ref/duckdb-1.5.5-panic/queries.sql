@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW v_windy AS FROM read_json ('bulk.jsonl');
+CREATE OR REPLACE VIEW v_windy AS FROM read_json ('sample.jsonl');
 
 CREATE OR REPLACE VIEW v_dense AS
 SELECT
