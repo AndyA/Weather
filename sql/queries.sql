@@ -1,7 +1,5 @@
-create
-or replace view v_windy as
-from
-  read_json ('/data/weather/logs/windy/**/*.jsonl');
+CREATE OR REPLACE VIEW v_windy AS
+FROM read_json ('/data/weather/logs/windy/**/*.jsonl');
 
 CREATE OR REPLACE VIEW v_dense AS
 SELECT
