@@ -4,57 +4,55 @@
 -- CREATE OR REPLACE VIEW v_dense AS
 -- SELECT
 --   time,
---   last_value(c order by time ignore nulls) over (order by time) as c,
---   last_value(s order by time ignore nulls) over (order by time) as s,
---   last_value(g order by time ignore nulls) over (order by time) as g,
---   last_value(t order by time ignore nulls) over (order by time) as t,
---   last_value(r order by time ignore nulls) over (order by time) as r,
---   last_value(p order by time ignore nulls) over (order by time) as p,
---   last_value(h order by time ignore nulls) over (order by time) as h,
---   last_value(b order by time ignore nulls) over (order by time) as b,
+--   last_value(c order by time ignore nulls) over (order by time) AS c,
+--   last_value(s order by time ignore nulls) over (order by time) AS s,
+--   last_value(g order by time ignore nulls) over (order by time) AS g,
+--   last_value(t order by time ignore nulls) over (order by time) AS t,
+--   last_value(r order by time ignore nulls) over (order by time) AS r,
+--   last_value(p order by time ignore nulls) over (order by time) AS p,
+--   last_value(h order by time ignore nulls) over (order by time) AS h,
+--   last_value(b order by time ignore nulls) over (order by time) AS b,
 -- from v_windy;
 
 CREATE OR REPLACE TABLE v_dense AS
 FROM read_json ('tmp/windy.jsonl');
 
 
-create or replace view v_rich as
-select
-  *,
-  cos(radians(c)) * s as speed_n,
-  sin(radians(c)) * s as speed_e,
-  (t - 32) * 5 / 9 as temp
-from v_dense;
-
-
-CREATE
-OR REPLACE VIEW v_minute AS
+CREATE OR REPLACE VIEW v_rich AS
 SELECT
-  date_trunc('minute', time) as ts, 
-  min(s) as min_s, max(s) as max_s, avg(s) as avg_s,
-  min(g) as min_g, max(g) as max_g, avg(g) as avg_g,
-  min(r) as min_r, max(r) as max_r, avg(r) as avg_r,
-  min(p) as min_p, max(p) as max_p, avg(p) as avg_p,
-  min(h) as min_h, max(h) as max_h, avg(h) as avg_h,
-  min(b) as min_b, max(b) as max_b, avg(b) as avg_b,
-  min(speed_n) as min_speed_n, max(speed_n) as max_speed_n, avg(speed_n) as avg_speed_n,
-  min(speed_e) as min_speed_e, max(speed_e) as max_speed_e, avg(speed_e) as avg_speed_e,
-  min(temp) as min_temp, max(temp) as max_temp, avg(temp) as avg_temp
+  *,
+  cos(radians(c)) * s AS speed_n,
+  sin(radians(c)) * s AS speed_e,
+  (t - 32) * 5 / 9 AS temp
+FROM V_DENSE;
+
+
+CREATE OR REPLACE VIEW v_minute AS
+SELECT
+  date_trunc('minute', time) AS ts, 
+  min(s) AS min_s, max(s) AS max_s, avg(s) AS avg_s,
+  min(g) AS min_g, max(g) AS max_g, avg(g) AS avg_g,
+  min(r) AS min_r, max(r) AS max_r, avg(r) AS avg_r,
+  min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
+  min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
+  min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
+  min(speed_n) AS min_speed_n, max(speed_n) AS max_speed_n, avg(speed_n) AS avg_speed_n,
+  min(speed_e) AS min_speed_e, max(speed_e) AS max_speed_e, avg(speed_e) AS avg_speed_e,
+  min(temp) AS min_temp, max(temp) AS max_temp, avg(temp) AS avg_temp
 FROM v_rich
 GROUP BY ts;
 
-CREATE
-OR REPLACE VIEW v_hour AS
+CREATE OR REPLACE VIEW v_hour AS
 SELECT
-  date_trunc('hour', time) as ts,
-  min(s) as min_s, max(s) as max_s, avg(s) as avg_s,
-  min(g) as min_g, max(g) as max_g, avg(g) as avg_g,
-  min(r) as min_r, max(r) as max_r, avg(r) as avg_r,
-  min(p) as min_p, max(p) as max_p, avg(p) as avg_p,
-  min(h) as min_h, max(h) as max_h, avg(h) as avg_h,
-  min(b) as min_b, max(b) as max_b, avg(b) as avg_b,
-  min(speed_n) as min_speed_n, max(speed_n) as max_speed_n, avg(speed_n) as avg_speed_n,
-  min(speed_e) as min_speed_e, max(speed_e) as max_speed_e, avg(speed_e) as avg_speed_e,
-  min(temp) as min_temp, max(temp) as max_temp, avg(temp) as avg_temp
+  date_trunc('hour', time) AS ts,
+  min(s) AS min_s, max(s) AS max_s, avg(s) AS avg_s,
+  min(g) AS min_g, max(g) AS max_g, avg(g) AS avg_g,
+  min(r) AS min_r, max(r) AS max_r, avg(r) AS avg_r,
+  min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
+  min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
+  min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
+  min(speed_n) AS min_speed_n, max(speed_n) AS max_speed_n, avg(speed_n) AS avg_speed_n,
+  min(speed_e) AS min_speed_e, max(speed_e) AS max_speed_e, avg(speed_e) AS avg_speed_e,
+  min(temp) AS min_temp, max(temp) AS max_temp, avg(temp) AS avg_temp
 FROM v_rich
 GROUP BY ts;
