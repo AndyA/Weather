@@ -30,29 +30,29 @@ FROM V_DENSE;
 CREATE OR REPLACE VIEW v_minute AS
 SELECT
   date_trunc('minute', time) AS ts, 
-  min(s) AS min_s, max(s) AS max_s, avg(s) AS avg_s,
-  min(g) AS min_g, max(g) AS max_g, avg(g) AS avg_g,
-  min(r) AS min_r, max(r) AS max_r, avg(r) AS avg_r,
-  min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
-  min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
-  min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
-  min(speed_n) AS min_sn, max(speed_n) AS max_sn, avg(speed_n) AS avg_sn,
-  min(speed_e) AS min_se, max(speed_e) AS max_se, avg(speed_e) AS avg_se,
-  min(tp) AS min_tp, max(tp) AS max_tp, avg(tp) AS avg_tp
+  min(s) AS ls, max(s) AS hs, avg(s) AS as,
+  min(g) AS lg, max(g) AS hg, avg(g) AS ag,
+  min(r) AS lr, max(r) AS hr, avg(r) AS ar,
+  min(p) AS lp, max(p) AS hp, avg(p) AS ap,
+  min(h) AS lh, max(h) AS hh, avg(h) AS ah,
+  min(b) AS lb, max(b) AS hb, avg(b) AS ab,
+  min(speed_n) AS lsn, max(speed_n) AS hsn, avg(speed_n) AS asn,
+  min(speed_e) AS lse, max(speed_e) AS hse, avg(speed_e) AS ase,
+  min(tp) AS ltp, max(tp) AS htp, avg(tp) AS atp
 FROM v_rich
 GROUP BY ts;
 
 CREATE OR REPLACE VIEW v_hour AS
 SELECT
   date_trunc('hour', time) AS ts,
-  min(s) AS min_s, max(s) AS max_s, avg(s) AS avg_s,
-  min(g) AS min_g, max(g) AS max_g, avg(g) AS avg_g,
-  min(r) AS min_r, max(r) AS max_r, avg(r) AS avg_r,
-  min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
-  min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
-  min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
-  min(speed_n) AS min_sn, max(speed_n) AS max_sn, avg(speed_n) AS avg_sn,
-  min(speed_e) AS min_se, max(speed_e) AS max_se, avg(speed_e) AS avg_se,
-  min(tp) AS min_tp, max(tp) AS max_tp, avg(tp) AS avg_tp
+  min(s) AS ls, max(s) AS hs, avg(s) AS as,
+  min(g) AS lg, max(g) AS hg, avg(g) AS ag,
+  min(r) AS lr, max(r) AS hr, avg(r) AS ar,
+  min(p) AS lp, max(p) AS hp, avg(p) AS ap,
+  min(h) AS lh, max(h) AS hh, avg(h) AS ah,
+  min(b) AS lb, max(b) AS hb, avg(b) AS ab,
+  min(speed_n) AS lsn, max(speed_n) AS hsn, avg(speed_n) AS asn,
+  min(speed_e) AS lse, max(speed_e) AS hse, avg(speed_e) AS ase,
+  min(tp) AS ltp, max(tp) AS htp, avg(tp) AS atp
 FROM v_rich
 GROUP BY ts;
