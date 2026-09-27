@@ -24,8 +24,7 @@ select
   cos(radians(c)) * s as speed_n,
   sin(radians(c)) * s as speed_e,
   (t - 32) * 5 / 9 as temp
-from
-  v_dense;
+from v_dense;
 
 
 CREATE
@@ -41,10 +40,8 @@ SELECT
   min(speed_n) as min_speed_n, max(speed_n) as max_speed_n, avg(speed_n) as avg_speed_n,
   min(speed_e) as min_speed_e, max(speed_e) as max_speed_e, avg(speed_e) as avg_speed_e,
   min(temp) as min_temp, max(temp) as max_temp, avg(temp) as avg_temp
-FROM
-  v_rich
-GROUP BY
-  ts;
+FROM v_rich
+GROUP BY ts;
 
 CREATE
 OR REPLACE VIEW v_hour AS
@@ -59,7 +56,5 @@ SELECT
   min(speed_n) as min_speed_n, max(speed_n) as max_speed_n, avg(speed_n) as avg_speed_n,
   min(speed_e) as min_speed_e, max(speed_e) as max_speed_e, avg(speed_e) as avg_speed_e,
   min(temp) as min_temp, max(temp) as max_temp, avg(temp) as avg_temp
-FROM
-  v_rich
-GROUP BY
-  ts;
+FROM v_rich
+GROUP BY ts;
