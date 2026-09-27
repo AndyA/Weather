@@ -21,8 +21,8 @@ FROM read_json ('tmp/windy.jsonl');
 CREATE OR REPLACE VIEW v_rich AS
 SELECT
   *,
-  cos(radians(c)) * s AS speed_n,
-  sin(radians(c)) * s AS speed_e,
+  cos(radians(c)) * s AS sn,
+  sin(radians(c)) * s AS se,
   (t - 32) * 5 / 9 AS tp
 FROM V_DENSE;
 
@@ -36,8 +36,8 @@ SELECT
   min(p) AS lp, max(p) AS hp, avg(p) AS ap,
   min(h) AS lh, max(h) AS hh, avg(h) AS ah,
   min(b) AS lb, max(b) AS hb, avg(b) AS ab,
-  min(speed_n) AS lsn, max(speed_n) AS hsn, avg(speed_n) AS asn,
-  min(speed_e) AS lse, max(speed_e) AS hse, avg(speed_e) AS ase,
+  min(sn) AS lsn, max(sn) AS hsn, avg(sn) AS asn,
+  min(se) AS lse, max(se) AS hse, avg(se) AS ase,
   min(tp) AS ltp, max(tp) AS htp, avg(tp) AS atp
 FROM v_rich
 GROUP BY ts;
@@ -51,8 +51,8 @@ SELECT
   min(p) AS lp, max(p) AS hp, avg(p) AS ap,
   min(h) AS lh, max(h) AS hh, avg(h) AS ah,
   min(b) AS lb, max(b) AS hb, avg(b) AS ab,
-  min(speed_n) AS lsn, max(speed_n) AS hsn, avg(speed_n) AS asn,
-  min(speed_e) AS lse, max(speed_e) AS hse, avg(speed_e) AS ase,
+  min(sn) AS lsn, max(sn) AS hsn, avg(sn) AS asn,
+  min(se) AS lse, max(se) AS hse, avg(se) AS ase,
   min(tp) AS ltp, max(tp) AS htp, avg(tp) AS atp
 FROM v_rich
 GROUP BY ts;
