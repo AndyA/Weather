@@ -24,7 +24,7 @@ SELECT
   cos(radians(c)) * s AS sn,
   sin(radians(c)) * s AS se,
   (t - 32) * 5 / 9 AS tp
-FROM V_DENSE;
+FROM v_dense;
 
 
 CREATE OR REPLACE VIEW v_minute AS
