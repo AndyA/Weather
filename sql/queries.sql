@@ -21,8 +21,8 @@ FROM read_json ('tmp/windy.jsonl');
 create or replace view v_rich as
 select
   *,
-  cos(radians (c)) * s as speed_n,
-  sin(radians (c)) * s as speed_e,
+  cos(radians(c)) * s as speed_n,
+  sin(radians(c)) * s as speed_e,
   (t - 32) * 5 / 9 as temp
 from
   v_dense;
