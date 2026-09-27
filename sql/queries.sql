@@ -1,5 +1,5 @@
 -- CREATE OR REPLACE VIEW v_windy AS
--- FROM read_json ('/data/weather/logs/windy/**/*.jsonl');
+-- FROM read_json('/data/weather/logs/windy/**/*.jsonl');
 -- 
 -- CREATE OR REPLACE VIEW v_dense AS
 -- SELECT
@@ -15,7 +15,7 @@
 -- from v_windy;
 
 CREATE OR REPLACE TABLE v_dense AS
-FROM read_json ('tmp/windy.jsonl');
+FROM read_json('tmp/windy.jsonl');
 
 
 CREATE OR REPLACE VIEW v_rich AS
