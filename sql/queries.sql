@@ -4,14 +4,14 @@
 -- CREATE OR REPLACE VIEW v_dense AS
 -- SELECT
 --   time,
---   last_value (c order by time ignore nulls) over (order by time) as c,
---   last_value (s order by time ignore nulls) over (order by time) as s,
---   last_value (g order by time ignore nulls) over (order by time) as g,
---   last_value (t order by time ignore nulls) over (order by time) as t,
---   last_value (r order by time ignore nulls) over (order by time) as r,
---   last_value (p order by time ignore nulls) over (order by time) as p,
---   last_value (h order by time ignore nulls) over (order by time) as h,
---   last_value (b order by time ignore nulls) over (order by time) as b,
+--   last_value(c order by time ignore nulls) over (order by time) as c,
+--   last_value(s order by time ignore nulls) over (order by time) as s,
+--   last_value(g order by time ignore nulls) over (order by time) as g,
+--   last_value(t order by time ignore nulls) over (order by time) as t,
+--   last_value(r order by time ignore nulls) over (order by time) as r,
+--   last_value(p order by time ignore nulls) over (order by time) as p,
+--   last_value(h order by time ignore nulls) over (order by time) as h,
+--   last_value(b order by time ignore nulls) over (order by time) as b,
 -- from v_windy;
 
 CREATE OR REPLACE TABLE v_dense AS
