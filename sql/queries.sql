@@ -23,7 +23,7 @@ SELECT
   *,
   cos(radians(c)) * s AS speed_n,
   sin(radians(c)) * s AS speed_e,
-  (t - 32) * 5 / 9 AS temp
+  (t - 32) * 5 / 9 AS tp
 FROM V_DENSE;
 
 
@@ -36,9 +36,9 @@ SELECT
   min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
   min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
   min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
-  min(speed_n) AS min_speed_n, max(speed_n) AS max_speed_n, avg(speed_n) AS avg_speed_n,
-  min(speed_e) AS min_speed_e, max(speed_e) AS max_speed_e, avg(speed_e) AS avg_speed_e,
-  min(temp) AS min_temp, max(temp) AS max_temp, avg(temp) AS avg_temp
+  min(speed_n) AS min_sn, max(speed_n) AS max_sn, avg(speed_n) AS avg_sn,
+  min(speed_e) AS min_se, max(speed_e) AS max_se, avg(speed_e) AS avg_se,
+  min(tp) AS min_tp, max(tp) AS max_tp, avg(tp) AS avg_tp
 FROM v_rich
 GROUP BY ts;
 
@@ -51,8 +51,8 @@ SELECT
   min(p) AS min_p, max(p) AS max_p, avg(p) AS avg_p,
   min(h) AS min_h, max(h) AS max_h, avg(h) AS avg_h,
   min(b) AS min_b, max(b) AS max_b, avg(b) AS avg_b,
-  min(speed_n) AS min_speed_n, max(speed_n) AS max_speed_n, avg(speed_n) AS avg_speed_n,
-  min(speed_e) AS min_speed_e, max(speed_e) AS max_speed_e, avg(speed_e) AS avg_speed_e,
-  min(temp) AS min_temp, max(temp) AS max_temp, avg(temp) AS avg_temp
+  min(speed_n) AS min_sn, max(speed_n) AS max_sn, avg(speed_n) AS avg_sn,
+  min(speed_e) AS min_se, max(speed_e) AS max_se, avg(speed_e) AS avg_se,
+  min(tp) AS min_tp, max(tp) AS max_tp, avg(tp) AS avg_tp
 FROM v_rich
 GROUP BY ts;
