@@ -1,25 +1,29 @@
-CREATE OR REPLACE VIEW v_windy AS
-FROM read_json ('/data/weather/logs/windy/**/*.jsonl');
+-- CREATE OR REPLACE VIEW v_windy AS
+-- FROM read_json ('/data/weather/logs/windy/**/*.jsonl');
+-- 
+-- CREATE OR REPLACE VIEW v_dense AS
+-- SELECT
+--   time,
+--   last_value ( c order by time ignore nulls ) over ( order by time ) as c,
+--   last_value ( s order by time ignore nulls ) over ( order by time ) as s,
+--   last_value ( g order by time ignore nulls ) over ( order by time ) as g,
+--   last_value ( t order by time ignore nulls ) over ( order by time ) as t,
+--   last_value ( r order by time ignore nulls ) over ( order by time ) as r,
+--   last_value ( p order by time ignore nulls ) over ( order by time ) as p,
+--   last_value ( h order by time ignore nulls ) over ( order by time ) as h,
+--   last_value ( b order by time ignore nulls ) over ( order by time ) as b,
+-- from v_windy;
 
-CREATE OR REPLACE VIEW v_dense AS
-SELECT
-  time,
-  last_value ( c order by time ignore nulls ) over ( order by time ) as c,
-  last_value ( s order by time ignore nulls ) over ( order by time ) as s,
-  last_value ( g order by time ignore nulls ) over ( order by time ) as g,
-  last_value ( t order by time ignore nulls ) over ( order by time ) as t,
-  last_value ( r order by time ignore nulls ) over ( order by time ) as r,
-  last_value ( p order by time ignore nulls ) over ( order by time ) as p,
-  last_value ( h order by time ignore nulls ) over ( order by time ) as h,
-  last_value ( b order by time ignore nulls ) over ( order by time ) as b,
-from v_windy;
+CREATE OR REPLACE TABLE v_dense AS
+FROM read_json ('tmp/windy.jsonl');
+
 
 create or replace view v_rich as
 select
   *,
   cos(radians (c)) * s as speed_n,
   sin(radians (c)) * s as speed_e,
-  (t - 32) * 100 / (212 - 32) as temp
+  (t - 32) * 5 / 9 as temp
 from
   v_dense;
 
