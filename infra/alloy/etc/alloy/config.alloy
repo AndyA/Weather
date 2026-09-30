@@ -2,7 +2,9 @@ logging {
   level = "warn"
 }
 
-http {}
+livedebugging {
+  enabled = true
+}
 
 loki.source.file "windy" {
   forward_to = [loki.process.decode.receiver]
@@ -25,17 +27,6 @@ loki.process "decode" {
     regex = ".*"
   }
 
-  stage.timestamp {
-    source = "time"
-    format = "RFC3339"
-  }
-
-  stage.static_labels {
-      values = {
-        node = "windy",
-      }
-  }
-
   stage.structured_metadata {
     values = {
       c = "", 
@@ -47,6 +38,17 @@ loki.process "decode" {
       h = "", 
       b = "", 
     }
+  }
+
+  stage.timestamp {
+    source = "time"
+    format = "RFC3339"
+  }
+
+  stage.static_labels {
+      values = {
+        node = "windy",
+      }
   }
 }
 
