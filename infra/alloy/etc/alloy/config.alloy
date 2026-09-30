@@ -25,3 +25,14 @@ prometheus.scrape "default" {
   // prometheus.relabel).
   ]
 }
+
+loki.source.file "windy" {
+  targets = [
+    {__path__  = "/data/weather/logs/windy/**/*.jsonl"}
+  ]
+  file_match {
+    enabled = true
+    sync_period = "10s"
+    ignore_older_than = "30d"
+  }
+}
