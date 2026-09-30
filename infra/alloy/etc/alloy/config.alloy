@@ -33,6 +33,19 @@ loki.process "decode" {
     source = "time"
     format = "RFC3339"
   }
+
+  stage.structured_metadata {
+    values = {
+      "c": "", 
+      "s": "", 
+      "g": "", 
+      "t": "", 
+      "r": "", 
+      "p": "", 
+      "h": "", 
+      "b": "", 
+    }
+  }
 }
 
 loki.write "pike_loki" {
