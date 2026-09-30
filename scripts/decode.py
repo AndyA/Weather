@@ -15,7 +15,11 @@ else:
     source = SerialSource(port="/dev/serial0")
     json_logger = JsonLogger(prefix="/data/weather/logs/windy")
 
-logger = DeltaLogger(logger=json_logger, verbose=True)
+logger = DeltaLogger(
+    logger=json_logger,
+    verbose=True,
+    complete=True,
+)
 
 for line in source.messages():
     now = datetime.now(UTC)

@@ -10,6 +10,8 @@ from lib.tools import obj_diff
 class DeltaLogger:
     logger: JsonLogger
     verbose: bool = False
+    complete: bool = False
+
     prev_payload: dict[str, Any] | None = None
     prev_filename: str | None = None
 
@@ -20,7 +22,8 @@ class DeltaLogger:
             self.prev_filename = filename
 
         delta = obj_diff(self.prev_payload, payload)
-        self.prev_payload = payload
+        if not self.complete:
+            self.prev_payload = payload
 
         if len(delta):
             obj: dict[str, str | int] = {"time": ts.isoformat(), **delta}
