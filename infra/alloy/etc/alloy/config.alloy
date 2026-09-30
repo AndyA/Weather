@@ -27,18 +27,18 @@ loki.process "decode" {
     regex = ".*"
   }
 
-  stage.structured_metadata {
-    values = {
-      c = "", 
-      s = "", 
-      g = "", 
-      t = "", 
-      r = "", 
-      p = "", 
-      h = "", 
-      b = "", 
-    }
-  }
+  // stage.structured_metadata {
+  //   values = {
+  //     c = "", 
+  //     s = "", 
+  //     g = "", 
+  //     t = "", 
+  //     r = "", 
+  //     p = "", 
+  //     h = "", 
+  //     b = "", 
+  //   }
+  // }
 
   stage.timestamp {
     source = "time"
