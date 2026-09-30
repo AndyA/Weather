@@ -1,13 +1,14 @@
-
 logging {
   level = "warn"
 }
 
 loki.source.file "windy" {
+  forward_to = [loki.process.decode.receiver]
+
   targets = [
     {__path__  = "/data/weather/logs/windy/**/*.jsonl"}
   ]
-  forward_to = [loki.process.decode.receiver]
+
   file_match {
     enabled = true
     sync_period = "10s"
@@ -16,9 +17,11 @@ loki.source.file "windy" {
 }
 
 loki.process "decode" {
-  forward_to = [loki.write.pike_loki]
+  forward_to = [loki.write.pike_loki.receiver]
 
-  stage.json {}
+  stage.json {
+    regex = ".*"
+  }
 
   stage.timestamp {
     source = "time"
