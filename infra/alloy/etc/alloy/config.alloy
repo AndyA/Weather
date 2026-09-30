@@ -8,7 +8,7 @@ loki.source.file "windy" {
   forward_to = [loki.process.decode.receiver]
 
   targets = [
-    {__path__  = "/data/weather/logs/windy/**/*.jsonl"}
+    { __path__ = "/data/weather/logs/windy/**/*.jsonl" },
   ]
 
   file_match {
