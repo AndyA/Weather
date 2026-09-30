@@ -23,8 +23,9 @@ loki.process "decode" {
 
   stage.json {
     regex = ".*"
+
     expressions = {
-      t = "",
+      output = "t"
     }
   }
 
