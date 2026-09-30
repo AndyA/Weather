@@ -14,7 +14,7 @@ loki.source.file "windy" {
   file_match {
     enabled = true
     sync_period = "10s"
-    ignore_older_than = "30d"
+    ignore_older_than = "1000h"
   }
 }
 
