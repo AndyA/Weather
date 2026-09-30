@@ -23,6 +23,9 @@ loki.process "decode" {
 
   stage.json {
     regex = ".*"
+    expressions = {
+      t = "",
+    }
   }
 
   stage.timestamp {
