@@ -23,7 +23,9 @@ loki.source.file "windy" {
 loki.process "decode" {
   forward_to = [loki.write.pike_loki.receiver]
 
-  stage.json {}
+  stage.json {
+    regex = ".*"
+  }
 
   stage.structured_metadata {
     values = {
