@@ -23,15 +23,17 @@ loki.process "decode" {
 
   stage.json {
     regex = ".*"
-
-    expressions = {
-      output = "t"
-    }
   }
 
   stage.timestamp {
     source = "time"
     format = "RFC3339"
+  }
+
+  stage.static_labels {
+      values = {
+        node = "windy",
+      }
   }
 
   stage.structured_metadata {
