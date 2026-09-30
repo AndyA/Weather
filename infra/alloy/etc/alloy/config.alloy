@@ -36,14 +36,14 @@ loki.process "decode" {
 
   stage.structured_metadata {
     values = {
-      "c" = "", 
-      "s" = "", 
-      "g" = "", 
-      "t" = "", 
-      "r" = "", 
-      "p" = "", 
-      "h" = "", 
-      "b" = "", 
+      c = "", 
+      s = "", 
+      g = "", 
+      t = "", 
+      r = "", 
+      p = "", 
+      h = "", 
+      b = "", 
     }
   }
 }
