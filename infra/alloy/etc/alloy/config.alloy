@@ -25,6 +25,7 @@ loki.process "decode" {
 
   stage.json {
     expressions = {
+      time = "time"
       c = "c", 
       s = "s", 
       g = "g", 
