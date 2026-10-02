@@ -45,6 +45,65 @@ loki.process "decode" {
     format = "RFC3339"
   }
 
+  stage.metrics {
+    metric.gauge {
+      action = "set"
+      name = "wind_direction"
+      description = "Wind direction in degrees"
+      source = "c"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "wind_speed_1m"
+      description = "Wind speed for last minute (mph)"
+      source = "s"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "wind_speed_5m"
+      description = "Wind speed for last 5 minutes (mph)"
+      source = "g"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "temperature"
+      description = "Temperature (Fahrenheit)"
+      source = "t"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "rainfall_1h"
+      description = "Rainfall in last hour (0.01 inches)"
+      source = "r"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "rainfall_24h"
+      description = "Rainfall in last 24 hours (0.01 inches)"
+      source = "p"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "humidity"
+      description = "Humidity (%)"
+      source = "h"
+      prefix = ""
+    }
+    metric.gauge {
+      action = "set"
+      name = "pressure"
+      description = "Pressure (0.1 hpa)"
+      source = "b"
+      prefix = ""
+    }
+  }
+
   stage.static_labels {
       values = {
         node = "windy",
