@@ -24,7 +24,16 @@ loki.process "decode" {
   forward_to = [loki.write.pike_loki.receiver]
 
   stage.json {
-    regex = ".*"
+    expressions = {
+      c = "c", 
+      s = "s", 
+      g = "g", 
+      t = "t", 
+      r = "r", 
+      p = "p", 
+      h = "h", 
+      b = "b", 
+    }
   }
 
   // stage.structured_metadata {
