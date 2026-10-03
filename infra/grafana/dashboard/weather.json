@@ -4,19 +4,18 @@
   "metadata": {
     "name": "adjbtr6",
     "namespace": "default",
-    "uid": "ec16fb6e-03ef-4fb6-b24f-3b83185c95d0",
-    "resourceVersion": "1791031571541997",
-    "generation": 3,
-    "creationTimestamp": "2026-10-03T12:27:12Z",
+    "uid": "8ab3e8b6-aeda-40e5-9e2e-58d5810298ff",
+    "resourceVersion": "1791034520635999",
+    "generation": 4,
+    "creationTimestamp": "2026-10-03T13:11:48Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3179390998790144"
+      "grafana.app/deprecatedInternalID": "3190614428028928"
     },
     "annotations": {
-      "grafana.app/createdBy": "user:dg042cbmgljwgd",
-      "grafana.app/message": "Pretty",
+      "grafana.app/createdBy": "user:fg046c8mvqk8wc",
       "grafana.app/saved-from-ui": "Grafana v13.2.3 (90ffed056f)",
-      "grafana.app/updatedBy": "user:dg042cbmgljwgd",
-      "grafana.app/updatedTimestamp": "2026-10-03T12:46:11Z"
+      "grafana.app/updatedBy": "user:fg046c8mvqk8wc",
+      "grafana.app/updatedTimestamp": "2026-10-03T13:35:20Z"
     }
   },
   "spec": {
@@ -44,6 +43,293 @@
     "cursorSync": "Off",
     "editable": true,
     "elements": {
+      "panel-10": {
+        "kind": "Panel",
+        "spec": {
+          "id": 10,
+          "title": "Rainfall",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "loki",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "builder",
+                        "expr": "avg(avg_over_time({node=\"windy\"} | json rain=\"r\" | unwrap rain [$__auto]))",
+                        "legendFormat": "rain (in)",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.2.3",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "lengthin",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-11": {
+        "kind": "Panel",
+        "spec": {
+          "id": 11,
+          "title": "Pressure",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "loki",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "avg(avg_over_time({node=\"windy\"} | json pressure=\"b\" | unwrap pressure [$__auto])) / 10",
+                        "legendFormat": "pressure (hpa)",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.2.3",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "pressurehpa",
+                  "decimals": 2,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-12": {
+        "kind": "Panel",
+        "spec": {
+          "id": 12,
+          "title": "Humidity",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "loki",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "builder",
+                        "expr": "avg(avg_over_time({node=\"windy\"} | json humidity=\"h\" | unwrap humidity [$__auto]))",
+                        "legendFormat": "humidity (%)",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.2.3",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percent",
+                  "decimals": 1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
       "panel-3": {
         "kind": "Panel",
         "spec": {
@@ -136,7 +422,7 @@
                       "viz": false
                     },
                     "insertNulls": false,
-                    "lineInterpolation": "linear",
+                    "lineInterpolation": "smooth",
                     "lineStyle": {
                       "fill": "solid"
                     },
@@ -255,7 +541,7 @@
                       "viz": false
                     },
                     "insertNulls": false,
-                    "lineInterpolation": "linear",
+                    "lineInterpolation": "smooth",
                     "lineStyle": {
                       "fill": "solid"
                     },
@@ -459,6 +745,8 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "none",
+                  "decimals": 1,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -493,7 +781,7 @@
                       "viz": false
                     },
                     "insertNulls": false,
-                    "lineInterpolation": "linear",
+                    "lineInterpolation": "smooth",
                     "lineStyle": {
                       "fill": "solid"
                     },
@@ -614,7 +902,7 @@
                       "viz": false
                     },
                     "insertNulls": false,
-                    "lineInterpolation": "linear",
+                    "lineInterpolation": "smooth",
                     "lineStyle": {
                       "fill": "solid"
                     },
@@ -640,6 +928,196 @@
             }
           }
         }
+      },
+      "panel-8": {
+        "kind": "Panel",
+        "spec": {
+          "id": 8,
+          "title": "Temperature",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "loki",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "avg(avg_over_time({node=\"windy\"} | json temp=\"t\" | unwrap temp [$__auto])) / 1.8 - 17.77777",
+                        "legendFormat": "temp (℃)",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.2.3",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-9": {
+        "kind": "Panel",
+        "spec": {
+          "id": 9,
+          "title": "Wind Speed",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "loki",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "builder",
+                        "expr": "avg(avg_over_time({node=\"windy\"} | json wind=\"s\" | unwrap wind [$__auto]))",
+                        "legendFormat": "wind speed (mph)",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "gauge",
+            "version": "13.2.3",
+            "spec": {
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "velocitymph",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
       }
     },
     "layout": {
@@ -651,6 +1129,71 @@
             "spec": {
               "x": 0,
               "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-8"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 4,
+              "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-9"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 8,
+              "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-10"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 12,
+              "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-11"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 16,
+              "y": 0,
+              "width": 4,
+              "height": 5,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-12"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 5,
               "width": 12,
               "height": 8,
               "element": {
@@ -663,7 +1206,7 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 12,
-              "y": 0,
+              "y": 5,
               "width": 12,
               "height": 8,
               "element": {
@@ -676,7 +1219,7 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 0,
-              "y": 8,
+              "y": 13,
               "width": 12,
               "height": 7,
               "element": {
@@ -689,7 +1232,7 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 12,
-              "y": 8,
+              "y": 13,
               "width": 12,
               "height": 7,
               "element": {
@@ -702,7 +1245,7 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 0,
-              "y": 15,
+              "y": 20,
               "width": 12,
               "height": 7,
               "element": {
