@@ -4,6 +4,8 @@ services:
     image: grafana/loki:latest
     ports:
       - "3100:3100"
+    volumes:
+      - /data/grafana/loki:/loki
     command: -config.file=/etc/loki/local-config.yaml
   prometheus:
     image: prom/prometheus:latest
@@ -12,6 +14,8 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+    volumes:
+      - /data/grafana/prometheus:/prometheus
   grafana:
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
@@ -31,19 +35,21 @@ services:
           orgId: 1
           url: http://loki:3100
           basicAuth: false
-          isDefault: false
+          isDefault: true
           version: 1
-          editable: false
+          editable: true
         - name: Prometheus
           type: prometheus
           orgId: 1
           url: http://prometheus:9090
           basicAuth: false
-          isDefault: true
+          isDefault: false
           version: 1
-          editable: false
+          editable: true
         EOF
         /run.sh
     image: grafana/grafana:latest
     ports:
       - "3000:3000"
+    volumes:
+      - /data/grafana/grafana:/var/lib/grafana
