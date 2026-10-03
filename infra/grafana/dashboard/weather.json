@@ -5,8 +5,8 @@
     "name": "adjbtr6",
     "namespace": "default",
     "uid": "8ab3e8b6-aeda-40e5-9e2e-58d5810298ff",
-    "resourceVersion": "1791034520635999",
-    "generation": 4,
+    "resourceVersion": "1791036250826011",
+    "generation": 9,
     "creationTimestamp": "2026-10-03T13:11:48Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "3190614428028928"
@@ -15,7 +15,7 @@
       "grafana.app/createdBy": "user:fg046c8mvqk8wc",
       "grafana.app/saved-from-ui": "Grafana v13.2.3 (90ffed056f)",
       "grafana.app/updatedBy": "user:fg046c8mvqk8wc",
-      "grafana.app/updatedTimestamp": "2026-10-03T13:35:20Z"
+      "grafana.app/updatedTimestamp": "2026-10-03T14:04:10Z"
     }
   },
   "spec": {
@@ -88,11 +88,11 @@
             "spec": {
               "options": {
                 "barShape": "flat",
-                "barWidthFactor": 0.5,
+                "barWidthFactor": 0.54,
                 "effects": {
                   "barGlow": false,
                   "centerGlow": false,
-                  "gradient": true
+                  "gradient": false
                 },
                 "endpointMarker": "point",
                 "minVizHeight": 75,
@@ -116,11 +116,15 @@
                 "defaults": {
                   "unit": "lengthin",
                   "thresholds": {
-                    "mode": "absolute",
+                    "mode": "percentage",
                     "steps": [
                       {
                         "value": 0,
                         "color": "green"
+                      },
+                      {
+                        "value": 60,
+                        "color": "#EAB839"
                       },
                       {
                         "value": 80,
@@ -388,6 +392,7 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "celsius",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -507,6 +512,7 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "velocitymph",
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -626,6 +632,8 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "lengthin",
+                  "decimals": 1,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -745,7 +753,7 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "none",
+                  "unit": "percent",
                   "decimals": 1,
                   "thresholds": {
                     "mode": "absolute",
@@ -866,7 +874,7 @@
               },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "none",
+                  "unit": "pressurehpa",
                   "decimals": 2,
                   "thresholds": {
                     "mode": "absolute",
@@ -1172,7 +1180,7 @@
               "height": 5,
               "element": {
                 "kind": "ElementReference",
-                "name": "panel-11"
+                "name": "panel-12"
               }
             }
           },
@@ -1185,7 +1193,7 @@
               "height": 5,
               "element": {
                 "kind": "ElementReference",
-                "name": "panel-12"
+                "name": "panel-11"
               }
             }
           },
@@ -1195,7 +1203,7 @@
               "x": 0,
               "y": 5,
               "width": 12,
-              "height": 8,
+              "height": 7,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-3"
@@ -1208,7 +1216,7 @@
               "x": 12,
               "y": 5,
               "width": 12,
-              "height": 8,
+              "height": 7,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-4"
@@ -1219,9 +1227,9 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 0,
-              "y": 13,
+              "y": 12,
               "width": 12,
-              "height": 7,
+              "height": 6,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-5"
@@ -1232,9 +1240,9 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 12,
-              "y": 13,
+              "y": 12,
               "width": 12,
-              "height": 7,
+              "height": 6,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-6"
@@ -1245,7 +1253,7 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 0,
-              "y": 20,
+              "y": 18,
               "width": 12,
               "height": 7,
               "element": {
